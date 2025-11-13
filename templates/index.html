@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cortex Signal Analyzer</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    .container { max-width: 500px; margin: auto; text-align: center; }
+    .result { margin-top: 1em; padding: 1em; border: 1px solid #ccc; }
+    .error { color: red; }
+    .image-preview { max-width: 100%; margin-top: 1em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cortex Signal Analyzer</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <p>Upload a screenshot to analyze the signal:</p>
+      <input type="file" name="screenshot" accept="image/*" required />
+      <br><br>
+      <button type="submit">Upload and Analyze</button>
+    </form>
+    {% if error %}
+      <div class="result error"><strong>Error:</strong> {{ error }}</div>
+    {% endif %}
+    {% if result_text %}
+      <div class="result">
+        <h3>Analysis Result</h3>
+        <p>{{ result_text }}</p>
+        {% if image_url %}
+          <img src="{{ image_url }}" alt="Uploaded Screenshot" class="image-preview"/>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
